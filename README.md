@@ -21,6 +21,8 @@ To run this:
 I think it is always good practice to review your own code after it is done. So here I will go over some of the design choices I made that could be questioned in 
 a normal code review, and comment on why they were made (spoiler mostly due to time constraints), and what I would change given more time/knowledge.
 
+I did set myself the hard limit of the recommended 8 hours on this, as didn't want to mislead in my abilities.
+
  - **Server-client connection is not HTTP:** Have little experience in prolonged server - client connections, and for first reading of docs not sure if persistent 
  connections are possible over HTTP or if they are single request only. Instead opted to learn how to use TCP sockets as proved more promising given the time constraints
    - Did consider the idea of after recieving a request from one client, and then finishing the request from the other before replying to the first client.
