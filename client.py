@@ -20,7 +20,7 @@ def listen_to_server():
     while True:
         response = get_response(server)
         print(response)
-        if "your turn" in response.lower():
+        if "your turn" in response.lower() or "valid move" in response.lower():
             return True
         elif "game over" in response.lower():
             return False
@@ -30,7 +30,7 @@ while True:
     if not our_turn:  # if stopped listenting but not our turn game has ended
         break
     while (to_send := input("Enter your move (1-9) or q to quit: ")).lower() != 'q':
-        if to_send not in '123456789':
+        if to_send not in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
             print("Please enter a number between 1 and 9 (inclusive), or q to quit")
         else:
             break
@@ -38,5 +38,4 @@ while True:
         break
     send_str(server, to_send)
 
-# close the socket
 server.close()

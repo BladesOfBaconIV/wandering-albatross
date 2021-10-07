@@ -18,7 +18,7 @@ def send_str(socket: socket, message: str) -> None:
     """
     Send a string to a socket (handles encoding)
     """
-    socket.send(message.encode())
+    socket.send(f"{message}\n".encode())
 
 
 def get_response(socket: socket, buffer_size=1024) -> str:

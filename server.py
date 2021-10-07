@@ -57,13 +57,16 @@ def start_players_turn(game: Game, player: Player) -> bool:
         return False
 
 def run():
+    """
+    Main server run thread, handles playing of game and closing player connections
+    """
     teams = [Piece.RED, Piece.YELLOW, ]  # teams for the game, first player is red, second is yellow
     players = []
     game = Game()
     turn = 0
     for team in teams:
         players.append(wait_for_player(team))
-    while not (winner := game.is_won()) or not game.is_full():
+    while (winner := game.is_won()) is Piece.EMPTY and not game.is_full():
         current_player = players[turn % 2]
         if not start_players_turn(game, current_player):
             send_str(players[(turn + 1) % 2].socket, f"Game over. Player {current_player.username} disconnected.")
@@ -79,7 +82,8 @@ def run():
 
     for player in players:
         send_str(player.socket, "--- GAME OVER ---")
-        send_str(player.socket, f"{end_message}\n")
+        send_str(player.socket, game)
+        send_str(player.socket, f"{end_message}")
         player.socket.close()
 
 

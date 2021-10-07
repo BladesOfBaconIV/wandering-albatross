@@ -33,7 +33,6 @@ class Game:
         Check if the game is won, returning the colour of the winner (or EMPTY if there is no winner)
         """
         # check columns
-        print("--------------")
         for col in range(self.COLS):
             pieces_in_column = set(row[col] for row in self.board)
             if len(pieces_in_column) == 1 and Piece.EMPTY not in pieces_in_column:
